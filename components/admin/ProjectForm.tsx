@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { X, Plus, Save, Loader2 } from "lucide-react";
 import { RichTextEditor } from "./RichTextEditor";
+import { ImageCropUpload } from "./ImageCropUpload";
+import { PDFUpload } from "./PDFUpload";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
@@ -262,11 +264,32 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
       {/* Media */}
       <FormSection title="Media & Links">
-        <Field label="Cover Image URL">
-          <input {...register("coverUrl")} className="input-dark w-full" placeholder="https://..." />
+        <Field label="Cover Image">
+          <Controller
+            name="coverUrl"
+            control={control}
+            render={({ field }) => (
+              <ImageCropUpload
+                value={field.value}
+                onUpload={async (url) => field.onChange(url)}
+                label="Upload Cover Image"
+                shape="rect"
+                aspect={16 / 9}
+              />
+            )}
+          />
         </Field>
-        <Field label="PDF Document URL">
-          <input {...register("pdfUrl")} className="input-dark w-full" placeholder="https://..." />
+        <Field label="PDF Document">
+          <Controller
+            name="pdfUrl"
+            control={control}
+            render={({ field }) => (
+              <PDFUpload
+                value={field.value}
+                onUpload={(url) => field.onChange(url)}
+              />
+            )}
+          />
         </Field>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="GitHub URL">
