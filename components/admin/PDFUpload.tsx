@@ -3,6 +3,11 @@
 import { useRef, useState } from "react";
 import { Upload, FileText, X, Loader2, ExternalLink } from "lucide-react";
 import { toast } from "sonner";
+import { createClient } from "@supabase/supabase-js";
+
+// Client-side Supabase with anon key (upload directly, bypass Vercel 4.5MB limit)
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 interface PDFUploadProps {
   value?: string | null;
@@ -16,33 +21,35 @@ export function PDFUpload({ value, onUpload }: PDFUploadProps) {
   const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.type !== "application/pdf") {
-      toast.error("Only PDF files allowed");
-      return;
-    }
-    if (file.size > 20 * 1024 * 1024) {
-      toast.error("File too large (max 20MB)");
+    if (file.size > 50 * 1024 * 1024) {
+      toast.error("File too large (max 50MB)");
       return;
     }
 
     setUploading(true);
     try {
-      const fd = new FormData();
-      fd.append("file", file);
-      const res = await fetch("/api/upload-pdf", { method: "POST", body: fd });
-      const data = await res.json();
-      if (!res.ok || data.error) throw new Error(data.error);
-      onUpload(data.url);
+      const supabase = createClient(supabaseUrl, supabaseAnonKey);
+      const filename = `pdf-${Date.now()}-${Math.random().toString(36).slice(2)}.pdf`;
+
+      const { error } = await supabase.storage
+        .from("portfolio")
+        .upload(filename, file, { contentType: "application/pdf", upsert: false });
+
+      if (error) throw error;
+
+      const { data: { publicUrl } } = supabase.storage.from("portfolio").getPublicUrl(filename);
+      onUpload(publicUrl);
       toast.success("PDF uploaded!");
-    } catch {
-      toast.error("Upload failed");
+    } catch (err) {
+      console.error(err);
+      toast.error("Upload failed — check Supabase bucket permissions");
     } finally {
       setUploading(false);
       if (inputRef.current) inputRef.current.value = "";
     }
   };
 
-  const filename = value ? value.split("/").pop()?.split("?")[0] : null;
+  const filename = value ? decodeURIComponent(value.split("/").pop()?.split("?")[0] ?? "") : null;
 
   return (
     <div className="space-y-2">
@@ -53,11 +60,7 @@ export function PDFUpload({ value, onUpload }: PDFUploadProps) {
           <a href={value} target="_blank" rel="noreferrer" className="text-primary hover:opacity-80">
             <ExternalLink size={14} />
           </a>
-          <button
-            type="button"
-            onClick={() => onUpload("")}
-            className="text-muted-foreground hover:text-red-400"
-          >
+          <button type="button" onClick={() => onUpload("")} className="text-muted-foreground hover:text-red-400">
             <X size={14} />
           </button>
         </div>
@@ -76,16 +79,10 @@ export function PDFUpload({ value, onUpload }: PDFUploadProps) {
             <><Upload size={14} /> {value ? "Replace PDF" : "Upload PDF"}</>
           )}
         </button>
-        <span className="text-xs text-muted-foreground/50">Max 20MB · PDF only</span>
+        <span className="text-xs text-muted-foreground/50">Max 50MB · PDF only</span>
       </div>
 
-      <input
-        ref={inputRef}
-        type="file"
-        accept="application/pdf"
-        className="hidden"
-        onChange={handleFile}
-      />
+      <input ref={inputRef} type="file" accept="application/pdf" className="hidden" onChange={handleFile} />
     </div>
   );
 }
