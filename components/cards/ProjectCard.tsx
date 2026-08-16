@@ -35,13 +35,13 @@ export function ProjectCard({ project, className }: ProjectCardProps) {
         )}
       >
         {/* Cover Image */}
-        <div className="relative h-48 bg-gradient-to-br from-muted to-card overflow-hidden">
+        <div className="relative bg-gradient-to-br from-muted to-card overflow-hidden" style={{ aspectRatio: "16/9" }}>
           {project.coverUrl ? (
             <Image
               src={project.coverUrl}
               alt={project.title}
               fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500"
+              className="object-contain group-hover:scale-105 transition-transform duration-500"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center">
