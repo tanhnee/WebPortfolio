@@ -106,8 +106,8 @@ export function ImageCropUpload({
   // ── Crop modal ──────────────────────────────────────────────────────────────
   if (src) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-        <div className="bg-card border border-white/10 rounded-2xl w-full max-w-md overflow-hidden shadow-2xl">
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+        <div className="bg-card border border-white/10 rounded-2xl w-full max-w-md shadow-2xl my-auto" style={{ maxHeight: "calc(100vh - 2rem)", overflowY: "auto" }}>
           {/* Header */}
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
             <h3 className="font-semibold text-foreground text-sm">Crop & Position Image</h3>
