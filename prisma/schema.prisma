@@ -1,0 +1,156 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model Profile {
+  id          String   @id @default(cuid())
+  name        String   @default("Le Buu Tanh")
+  title       String   @default("Business Analyst | Data Analyst | AI Solution Builder")
+  bio         String   @db.Text
+  summary     String?  @db.Text
+  email       String   @default("buutanh10032005@gmail.com")
+  phone       String?
+  location    String   @default("Ho Chi Minh City, Vietnam")
+  avatarUrl   String?
+  cvUrl       String?
+  linkedinUrl String?
+  githubUrl   String?
+  facebookUrl String?
+  website     String?
+  updatedAt   DateTime @updatedAt
+}
+
+model Project {
+  id           String         @id @default(cuid())
+  slug         String         @unique
+  title        String
+  subtitle     String?
+  category     String
+  status       String         @default("completed")
+  featured     Boolean        @default(false)
+  coverUrl     String?
+  thumbnailUrl String?
+  pdfUrl       String?
+  description  String         @db.Text
+  abstract     String?        @db.Text
+  problem      String?        @db.Text
+  objectives   String?        @db.Text
+  methodology  String?        @db.Text
+  architecture String?        @db.Text
+  features     String?        @db.Text
+  results      String?        @db.Text
+  lessons      String?        @db.Text
+  role         String?
+  team         String?
+  githubUrl    String?
+  demoUrl      String?
+  startDate    DateTime?
+  endDate      DateTime?
+  tags         String[]
+  technologies String[]
+  images       ProjectImage[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model ProjectImage {
+  id        String  @id @default(cuid())
+  projectId String
+  url       String
+  caption   String?
+  order     Int     @default(0)
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Experience {
+  id          String    @id @default(cuid())
+  company     String
+  position    String
+  type        String    @default("work")
+  description String    @db.Text
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  location    String?
+  logoUrl     String?
+  order       Int       @default(0)
+  createdAt   DateTime  @default(now())
+}
+
+model Research {
+  id          String    @id @default(cuid())
+  title       String
+  journal     String?
+  conference  String?
+  authors     String[]
+  abstract    String    @db.Text
+  doi         String?
+  pdfUrl      String?
+  publishedAt DateTime?
+  status      String    @default("published")
+  tags        String[]
+  createdAt   DateTime  @default(now())
+}
+
+model Award {
+  id          String   @id @default(cuid())
+  title       String
+  issuer      String
+  description String?  @db.Text
+  date        DateTime
+  imageUrl    String?
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Skill {
+  id       String  @id @default(cuid())
+  name     String
+  category String
+  level    Int     @default(80)
+  icon     String?
+  order    Int     @default(0)
+}
+
+model Education {
+  id          String    @id @default(cuid())
+  school      String
+  degree      String
+  major       String
+  gpa         String?
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  description String?   @db.Text
+  logoUrl     String?
+  order       Int       @default(0)
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  body      String   @db.Text
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Setting {
+  id    String @id @default(cuid())
+  key   String @unique
+  value String @db.Text
+}
