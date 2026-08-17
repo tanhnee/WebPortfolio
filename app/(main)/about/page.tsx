@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: "Learn more about Tran Le Buu Tanh — E-commerce student, Business Analyst, Data Analyst, and AI Solution Builder.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function AboutPage() {
   const [profile, skills, education] = await Promise.all([

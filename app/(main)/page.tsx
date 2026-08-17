@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "Portfolio of Tran Le Buu Tanh — E-commerce & Information Systems student specializing in AI, Data Analytics, and Business Intelligence.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function HomePage() {
   const [profile, skills, experiences, research, education, featuredProjects, awards, projectCount] =

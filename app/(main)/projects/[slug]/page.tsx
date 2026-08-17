@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { ProjectDetailClient } from "./ProjectDetailClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;

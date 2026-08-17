@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Academic publications by Tran Le Buu Tanh in AI, data analytics, and business.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function ResearchPage() {
   const research = await prisma.research.findMany({ orderBy: { publishedAt: "desc" } });

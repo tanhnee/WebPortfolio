@@ -7,8 +7,6 @@ import { useProjects } from "@/hooks/useProjects";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { AnimatedSection } from "@/components/common/AnimatedSection";
 
-const CATEGORIES = ["All", "AI", "Data Analytics", "Business Intelligence", "Web Development", "Research"];
-
 export default function ProjectsPage() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -17,6 +15,9 @@ export default function ProjectsPage() {
     search: search || undefined,
     category: category === "All" ? undefined : category,
   });
+
+  const { data: allProjects } = useProjects({});
+  const categories = ["All", ...Array.from(new Set((allProjects ?? []).map((p) => p.category).filter(Boolean)))];
 
   return (
     <div className="pt-28 pb-20 min-h-screen">
@@ -51,7 +52,7 @@ export default function ProjectsPage() {
 
             <div className="flex items-center gap-2 flex-wrap">
               <Filter size={14} className="text-muted-foreground" />
-              {CATEGORIES.map((cat) => (
+              {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setCategory(cat)}
