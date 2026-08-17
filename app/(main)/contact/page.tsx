@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Get in touch with Tran Le Buu Tanh for collaborations, project opportunities, or just to say hello.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function ContactPage() {
   const profile = await prisma.profile.findFirst();

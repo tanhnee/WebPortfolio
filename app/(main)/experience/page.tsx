@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Tran Le Buu Tanh's leadership, research and extracurricular experience.",
 };
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function ExperiencePage() {
   const experiences = await prisma.experience.findMany({
