@@ -16,21 +16,21 @@ async function getCroppedBlob(imageSrc: string, cropArea: CropArea, shape: "roun
   });
 
   const canvas = document.createElement("canvas");
-  const size = Math.min(cropArea.width, cropArea.height);
-  canvas.width = size;
-  canvas.height = size;
+  canvas.width = cropArea.width;
+  canvas.height = cropArea.height;
   const ctx = canvas.getContext("2d")!;
 
   if (shape === "round") {
+    const r = Math.min(cropArea.width, cropArea.height) / 2;
     ctx.beginPath();
-    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.arc(cropArea.width / 2, cropArea.height / 2, r, 0, Math.PI * 2);
     ctx.clip();
   }
 
   ctx.drawImage(
     image,
     cropArea.x, cropArea.y, cropArea.width, cropArea.height,
-    0, 0, size, size,
+    0, 0, cropArea.width, cropArea.height,
   );
 
   return new Promise((resolve) => canvas.toBlob((b) => resolve(b!), "image/jpeg", 0.92));
