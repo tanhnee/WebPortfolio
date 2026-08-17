@@ -132,7 +132,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Abstract
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.abstract }}
                       />
                     </div>
@@ -144,7 +144,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Problem Statement
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.problem }}
                       />
                     </div>
@@ -156,7 +156,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Objectives
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.objectives }}
                       />
                     </div>
@@ -168,7 +168,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Results & Outcomes
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.results }}
                       />
                     </div>
@@ -180,7 +180,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Lessons Learned
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.lessons }}
                       />
                     </div>
@@ -196,7 +196,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Methodology
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.methodology }}
                       />
                     </div>
@@ -208,7 +208,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         System Architecture
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.architecture }}
                       />
                     </div>
@@ -220,7 +220,7 @@ export function ProjectDetailClient({ project }: { project: Project }) {
                         Key Features
                       </h2>
                       <div
-                        className="text-muted-foreground leading-relaxed"
+                        className="rich-content text-muted-foreground leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: project.features }}
                       />
                     </div>
