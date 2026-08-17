@@ -43,7 +43,7 @@ const projectSchema = z.object({
 
 type FormData = z.infer<typeof projectSchema>;
 
-const CATEGORIES = ["AI", "Data Analytics", "Business Intelligence", "Web Development", "Research"];
+const CATEGORIES = ["AI", "Data Analytics", "Business Intelligence", "Web Development", "Research", "SCM", "Mobile Development", "Marketing Technology"];
 const STATUSES = ["completed", "in-progress", "planned"];
 
 interface ProjectFormProps {
@@ -141,6 +141,8 @@ export function ProjectForm({ project }: ProjectFormProps) {
     register,
     handleSubmit,
     control,
+    watch,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(projectSchema),
@@ -214,13 +216,38 @@ export function ProjectForm({ project }: ProjectFormProps) {
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Field label="Category" error={errors.category?.message} required>
-            <select {...register("category")} className="input-dark w-full">
-              {CATEGORIES.map((c) => (
-                <option key={c} value={c} style={{ background: "#0E1628" }}>
-                  {c}
-                </option>
-              ))}
-            </select>
+            {(() => {
+              const currentVal = watch("category");
+              const isCustom = currentVal && !CATEGORIES.includes(currentVal);
+              return (
+                <div className="flex flex-col gap-1">
+                  <select
+                    value={isCustom ? "__custom__" : currentVal}
+                    onChange={(e) => {
+                      if (e.target.value === "__custom__") {
+                        setValue("category", "");
+                      } else {
+                        setValue("category", e.target.value);
+                      }
+                    }}
+                    className="input-dark w-full"
+                  >
+                    {CATEGORIES.map((c) => (
+                      <option key={c} value={c} style={{ background: "#0E1628" }}>{c}</option>
+                    ))}
+                    <option value="__custom__" style={{ background: "#0E1628" }}>+ Custom...</option>
+                  </select>
+                  {(isCustom || currentVal === "") && (
+                    <input
+                      {...register("category")}
+                      className="input-dark w-full"
+                      placeholder="Type category name..."
+                      autoFocus
+                    />
+                  )}
+                </div>
+              );
+            })()}
           </Field>
 
           <Field label="Status">
