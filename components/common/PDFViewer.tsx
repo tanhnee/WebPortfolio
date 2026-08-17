@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FileText, ExternalLink, Download } from "lucide-react";
+import { FileText, ExternalLink } from "lucide-react";
 
 interface PDFViewerProps {
   url: string;
@@ -27,14 +27,6 @@ export function PDFViewer({ url, title }: PDFViewerProps) {
           >
             <ExternalLink size={12} />
             Open in new tab
-          </a>
-          <a
-            href={url}
-            download
-            className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors px-2.5 py-1 rounded-lg border border-white/10 hover:border-white/20"
-          >
-            <Download size={12} />
-            Download
           </a>
         </div>
       </div>
