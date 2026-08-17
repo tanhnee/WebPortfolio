@@ -8,7 +8,7 @@ import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
 export const metadata: Metadata = {
-  title: "MaivenPoint AI | Tran Le Buu Tanh — Business Analyst & AI Builder",
+  title: "Tran Le Buu Tanh — Business Analyst & AI Builder",
   description:
     "Portfolio of Tran Le Buu Tanh — E-commerce & Information Systems student specializing in AI, Data Analytics, and Business Intelligence.",
 };
@@ -44,8 +44,8 @@ export default async function HomePage() {
       />
       <AboutSection profile={profile} education={education} awards={JSON.parse(JSON.stringify(awards))} experiences={JSON.parse(JSON.stringify(experiences))} researchCount={research.length} />
       <ExperienceSection experiences={JSON.parse(JSON.stringify(experiences))} />
-      <SkillsSection skills={skills} />
       <ProjectsSection featuredProjects={JSON.parse(JSON.stringify(featuredProjects))} research={JSON.parse(JSON.stringify(research))} />
+      <SkillsSection skills={skills} />
       <ContactSection profile={profile} />
     </>
   );
