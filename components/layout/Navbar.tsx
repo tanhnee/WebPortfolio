@@ -105,7 +105,7 @@ export function Navbar() {
               <Link href="/" className="flex items-center gap-2 mb-6">
                 <Zap size={20} className="text-primary" />
                 <span className="font-bold text-xl gradient-text">
-                  MaivenPoint AI
+                  Tran Le Buu Tanh
                 </span>
               </Link>
 

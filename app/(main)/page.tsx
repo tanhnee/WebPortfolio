@@ -8,7 +8,7 @@ import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 
 export const metadata: Metadata = {
-  title: "Tran Le Buu Tanh — Business Analyst & AI Builder",
+  title: { absolute: "Tran Le Buu Tanh — Business Analyst & AI Builder" },
   description:
     "Portfolio of Tran Le Buu Tanh — E-commerce & Information Systems student specializing in AI, Data Analytics, and Business Intelligence.",
 };
