@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Linkedin, Mail, Facebook, Zap, Heart } from "lucide-react";
+import { Github, Linkedin, Mail, Facebook, Zap } from "lucide-react";
 
 const socialLinks = [
   {
@@ -35,12 +35,10 @@ export function Footer() {
               <div className="w-7 h-7 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center">
                 <Zap size={14} className="text-primary" />
               </div>
-              <span className="font-bold gradient-text-cyan">MaivenPoint</span>
-              <span className="text-accent font-semibold text-sm">AI</span>
+              <span className="font-bold gradient-text-cyan">Tran Le Buu Tanh</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
-              Building intelligent systems that optimize processes, enhance
-              decision-making, and create real value.
+              Business Analyst & AI Builder — turning data and systems into real business value.
             </p>
           </div>
 
@@ -93,11 +91,7 @@ export function Footer() {
 
         <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-muted-foreground">
           <p>© {new Date().getFullYear()} Le Buu Tanh. All rights reserved.</p>
-          <p className="flex items-center gap-1">
-            Built with{" "}
-            <Heart size={12} className="text-red-400 mx-0.5 fill-red-400" />{" "}
-            using Next.js & TailwindCSS
-          </p>
+          <p className="text-muted-foreground/50">buutanh-portfolio.vercel.app</p>
         </div>
       </div>
     </footer>

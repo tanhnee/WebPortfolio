@@ -12,36 +12,45 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "MaivenPoint AI | Le Buu Tanh Portfolio",
-    template: "%s | MaivenPoint AI",
+    default: "Tran Le Buu Tanh — Business Analyst & AI Builder",
+    template: "%s | Tran Le Buu Tanh",
   },
   description:
-    "Portfolio of Le Buu Tanh — Business Analyst, Data Analyst & AI Solution Builder specializing in AI, Data Analytics, and Business Intelligence.",
+    "Portfolio of Tran Le Buu Tanh — Business Analyst, Data Analyst & AI Solution Builder specializing in AI, Data Analytics, and Business Intelligence.",
   keywords: [
+    "Tran Le Buu Tanh",
     "Le Buu Tanh",
-    "MaivenPoint AI",
     "Business Analyst",
     "Data Analyst",
     "AI",
     "Portfolio",
     "E-commerce",
     "Information Systems",
+    "UEL",
   ],
-  authors: [{ name: "Le Buu Tanh" }],
-  creator: "Le Buu Tanh",
+  authors: [{ name: "Tran Le Buu Tanh" }],
+  creator: "Tran Le Buu Tanh",
+  icons: {
+    icon: [
+      {
+        url: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230E1628'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='700' font-size='13' fill='%2300E5FF'>BT</text></svg>",
+        type: "image/svg+xml",
+      },
+    ],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://maivenpoint.ai",
-    title: "MaivenPoint AI | Le Buu Tanh Portfolio",
+    url: "https://buutanh-portfolio.vercel.app",
+    title: "Tran Le Buu Tanh — Business Analyst & AI Builder",
     description:
-      "Portfolio of Le Buu Tanh — Business Analyst, Data Analyst & AI Solution Builder",
-    siteName: "MaivenPoint AI",
+      "Portfolio of Tran Le Buu Tanh — Business Analyst, Data Analyst & AI Solution Builder",
+    siteName: "Tran Le Buu Tanh Portfolio",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MaivenPoint AI | Le Buu Tanh Portfolio",
-    description: "Portfolio of Le Buu Tanh — Business Analyst & AI Builder",
+    title: "Tran Le Buu Tanh — Business Analyst & AI Builder",
+    description: "Portfolio of Tran Le Buu Tanh — Business Analyst & AI Builder",
   },
   robots: { index: true, follow: true },
 };
