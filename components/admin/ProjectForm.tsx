@@ -10,6 +10,7 @@ import { X, Plus, Save, Loader2 } from "lucide-react";
 import { RichTextEditor } from "./RichTextEditor";
 import { ImageCropUpload } from "./ImageCropUpload";
 import { PDFUpload } from "./PDFUpload";
+import { GalleryUpload } from "./GalleryUpload";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types";
 
@@ -136,6 +137,9 @@ function Field({
 export function ProjectForm({ project }: ProjectFormProps) {
   const router = useRouter();
   const isEdit = !!project;
+  const [galleryImages, setGalleryImages] = useState<{ id: string; url: string; caption?: string | null; order: number }[]>(
+    (project as any)?.images ?? []
+  );
 
   const {
     register,
@@ -386,6 +390,17 @@ export function ProjectForm({ project }: ProjectFormProps) {
           </Field>
         ))}
       </FormSection>
+
+      {/* Gallery */}
+      {isEdit && (
+        <FormSection title="Gallery Images">
+          <GalleryUpload
+            projectId={project.id}
+            images={galleryImages}
+            onImagesChange={setGalleryImages}
+          />
+        </FormSection>
+      )}
 
       {/* Submit */}
       <div className="flex items-center gap-4 sticky bottom-0 glass-nav p-4 -mx-8 -mb-8 px-8">
