@@ -12,7 +12,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: {
-    default: "Tran Le Buu Tanh — Business Analyst & AI Builder",
+    default: "Tran Le Buu Tanh | Portfolio",
     template: "%s | Tran Le Buu Tanh",
   },
   description:
