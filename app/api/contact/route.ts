@@ -1,9 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { z } from "zod";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "buutanh10032005@gmail.com",
+    pass: process.env.GMAIL_APP_PASSWORD,
+  },
+});
 
 const contactSchema = z.object({
   name: z.string().min(2),
@@ -26,9 +32,9 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    if (process.env.RESEND_API_KEY) {
-      await resend.emails.send({
-        from: "Portfolio Contact <onboarding@resend.dev>",
+    if (process.env.GMAIL_APP_PASSWORD) {
+      await transporter.sendMail({
+        from: `"Portfolio Contact" <buutanh10032005@gmail.com>`,
         to: "buutanh10032005@gmail.com",
         replyTo: data.email,
         subject: `[Portfolio] ${data.subject || "New message"} — from ${data.name}`,
