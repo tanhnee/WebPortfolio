@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { prisma } from "@/lib/db";
+import { prisma, safeQuery } from "@/lib/db";
 import { ProjectDetailClient } from "./ProjectDetailClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -11,7 +11,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const project = await prisma.project.findUnique({ where: { slug } });
+  const project = await safeQuery(() => prisma.project.findUnique({ where: { slug } }), null);
   if (!project) return { title: "Project Not Found" };
   return {
     title: project.title,
@@ -21,10 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
-  const project = await prisma.project.findUnique({
+  const project = await safeQuery(() => prisma.project.findUnique({
     where: { slug },
     include: { images: { orderBy: { order: "asc" } } },
-  });
+  }), null);
   if (!project) notFound();
   return <ProjectDetailClient project={JSON.parse(JSON.stringify(project))} />;
 }

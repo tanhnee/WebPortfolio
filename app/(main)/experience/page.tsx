@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { prisma } from "@/lib/db";
+import { prisma, safeQuery } from "@/lib/db";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 
 export const metadata: Metadata = {
@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   description: "Tran Le Buu Tanh's leadership, research and extracurricular experience.",
 };
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function ExperiencePage() {
-  const experiences = await prisma.experience.findMany({
+  const experiences = await safeQuery(() => prisma.experience.findMany({
     orderBy: [{ order: "asc" }, { startDate: "desc" }],
-  });
+  }), []);
 
   return (
     <div className="pt-28 pb-20 min-h-screen">
