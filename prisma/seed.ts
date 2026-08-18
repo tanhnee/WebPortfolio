@@ -34,7 +34,7 @@ async function main() {
         email: "buutanh10032005@gmail.com",
         phone: "+84 35 579 2919",
         location: "Ho Chi Minh City, Vietnam",
-        linkedinUrl: "https://linkedin.com/in/buutanhtranle",
+        linkedinUrl: "https://www.linkedin.com/in/buu-tanh-tran-le-1587a8321/",
       },
     });
   } else {
@@ -46,7 +46,7 @@ async function main() {
         email: "buutanh10032005@gmail.com",
         phone: "+84 35 579 2919",
         location: "Ho Chi Minh City, Vietnam",
-        linkedinUrl: "https://linkedin.com/in/buutanhtranle",
+        linkedinUrl: "https://www.linkedin.com/in/buu-tanh-tran-le-1587a8321/",
       },
     });
   }

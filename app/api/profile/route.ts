@@ -16,7 +16,7 @@ export async function GET() {
           bio: "I'm an E-commerce student with a strong background in Information Systems, Business Analysis, and Data Analytics. I specialize in building intelligent systems that optimize processes, enhance decision-making, and create real value.",
           email: "buutanh10032005@gmail.com",
           location: "Ho Chi Minh City, Vietnam",
-          linkedinUrl: "https://linkedin.com/in/buutanhtranle",
+          linkedinUrl: "https://www.linkedin.com/in/buu-tanh-tran-le-1587a8321/",
         },
       });
     }

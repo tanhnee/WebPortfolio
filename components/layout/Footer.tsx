@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, Facebook, Zap } from "lucide-react";
 
 const socialLinks = [
   {
-    href: "https://linkedin.com/in/buutanhtranle",
+    href: "https://www.linkedin.com/in/buu-tanh-tran-le-1587a8321/",
     icon: Linkedin,
     label: "LinkedIn",
   },
