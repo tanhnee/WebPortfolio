@@ -13,7 +13,7 @@ const socialLinks = [
     icon: Mail,
     label: "Email",
   },
-  { href: "https://facebook.com", icon: Facebook, label: "Facebook" },
+  { href: "https://www.facebook.com/lebuutanh.tran", icon: Facebook, label: "Facebook" },
 ];
 
 const footerLinks = [
