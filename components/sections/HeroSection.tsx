@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -51,6 +51,14 @@ export function HeroSection({ profile, education, researchCount, projectCount, a
   const email = profile?.email || "";
   const cvUrl = profile?.cvUrl || "#";
   const name = profile?.name || "Buu Tanh";
+  const [emailCopied, setEmailCopied] = useState(false);
+  const copyEmail = useCallback(() => {
+    if (!email) return;
+    navigator.clipboard.writeText(email).then(() => {
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    });
+  }, [email]);
   const firstName = name.split(" ").pop() || name;
   const edu = education[0];
 
@@ -139,7 +147,6 @@ export function HeroSection({ profile, education, researchCount, projectCount, a
               {[
                 { href: linkedinUrl, icon: Linkedin, label: "LinkedIn", show: !!profile?.linkedinUrl },
                 { href: githubUrl, icon: Github, label: "GitHub", show: !!profile?.githubUrl },
-                { href: `mailto:${email}`, icon: Mail, label: "Email", show: !!email },
               ].filter((s) => s.show).map((social) => (
                 <a
                   key={social.label}
@@ -152,6 +159,22 @@ export function HeroSection({ profile, education, researchCount, projectCount, a
                   <social.icon size={18} />
                 </a>
               ))}
+              {!!email && (
+                <div className="relative">
+                  <button
+                    onClick={copyEmail}
+                    aria-label="Copy email"
+                    className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 hover:bg-primary/5 transition-all duration-200"
+                  >
+                    <Mail size={18} />
+                  </button>
+                  {emailCopied && (
+                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-primary text-black px-2 py-1 rounded whitespace-nowrap">
+                      Copied!
+                    </span>
+                  )}
+                </div>
+              )}
             </motion.div>
           </div>
 
